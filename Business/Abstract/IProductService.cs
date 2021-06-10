@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LayeredArchitectureExample.Entities.DTOs;
 
 namespace LayeredArchitectureExample.Business.Abstract
 {
@@ -12,5 +13,6 @@ namespace LayeredArchitectureExample.Business.Abstract
         List<Product> GetAll();
         List<Product> GetAllByCategoryId(int id);
         List<Product> GetByUnitPrice(decimal min,decimal max);
+        List<ProductDetailDto> GetProductDetails();
     }
 }

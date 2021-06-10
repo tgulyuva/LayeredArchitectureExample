@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using LayeredArchitectureExample.DataAccess.Abstract;
 using LayeredArchitectureExample.Entities.Concrete;
+using LayeredArchitectureExample.Entities.DTOs;
 
 namespace LayeredArchitectureExample.DataAccess.Concrete.InMemory
 {
@@ -53,6 +54,11 @@ namespace LayeredArchitectureExample.DataAccess.Concrete.InMemory
         }
 
         public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProductDetailDto> GetProductDetails()
         {
             throw new NotImplementedException();
         }
