@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayeredArchitectureExample.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayeredArchitectureExample.ConsoleUI", "ConsoleUI\LayeredArchitectureExample.ConsoleUI.csproj", "{A5104A5D-E7AF-4199-BEB6-27CA88C4B44C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitectureExample.Core", "LayeredArchitectureExample.Core\LayeredArchitectureExample.Core.csproj", "{1FBA26BD-F76F-4973-B424-03289E0BFBD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayeredArchitectureExample.Core", "LayeredArchitectureExample.Core\LayeredArchitectureExample.Core.csproj", "{1FBA26BD-F76F-4973-B424-03289E0BFBD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayeredArchitectureExample.WebAPI", "LayeredArchitectureExample.WebAPI\LayeredArchitectureExample.WebAPI.csproj", "{461047DE-9F94-4908-9A0D-A6C5F1A458ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1FBA26BD-F76F-4973-B424-03289E0BFBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FBA26BD-F76F-4973-B424-03289E0BFBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FBA26BD-F76F-4973-B424-03289E0BFBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461047DE-9F94-4908-9A0D-A6C5F1A458ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461047DE-9F94-4908-9A0D-A6C5F1A458ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461047DE-9F94-4908-9A0D-A6C5F1A458ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461047DE-9F94-4908-9A0D-A6C5F1A458ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
