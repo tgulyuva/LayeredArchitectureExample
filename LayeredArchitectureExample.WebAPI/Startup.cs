@@ -10,6 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LayeredArchitectureExample.Business.Abstract;
+using LayeredArchitectureExample.Business.Concrete;
+using LayeredArchitectureExample.DataAccess.Abstract;
+using LayeredArchitectureExample.DataAccess.Concrete.EntityFramework;
 
 namespace LayeredArchitectureExample.WebAPI
 {
@@ -26,6 +30,8 @@ namespace LayeredArchitectureExample.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<IProductService, ProductManager>();
+            services.AddSingleton<IProductDal, EfProductDal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

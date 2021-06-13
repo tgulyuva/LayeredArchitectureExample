@@ -1,4 +1,5 @@
 ﻿using System;
+using LayeredArchitectureExample.Business.Abstract;
 using LayeredArchitectureExample.Business.Concrete;
 using LayeredArchitectureExample.DataAccess.Concrete.EntityFramework;
 using LayeredArchitectureExample.DataAccess.Concrete.InMemory;
@@ -16,7 +17,7 @@ namespace LayeredArchitectureExample.ConsoleUI
 
         private static void CategoryTest()
         {
-            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+            ICategoryService categoryManager = new CategoryManager(new EfCategoryDal());
             foreach (var category in categoryManager.GetAll())
             {
                 Console.WriteLine(category.CategoryName);
@@ -25,13 +26,13 @@ namespace LayeredArchitectureExample.ConsoleUI
 
         private static void ProductTest()
         {
-            ProductManager productManager = new ProductManager(new EfProductDal());
-            var result = productManager.GetProductDetails();
+            IProductService productManager = new ProductManager(new EfProductDal());
+            var result = productManager.GetAll();
             if (result.Success)
             {
                 foreach (var product in result.Data)
                 {
-                    Console.WriteLine(product.ProductName + " / " + product.CategoryName);
+                      Console.WriteLine(product.ProductName + " / " + product.CategoryId);
                 }
             }
             else
