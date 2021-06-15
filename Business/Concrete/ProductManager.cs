@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
 using LayeredArchitectureExample.Business.Abstract;
 using LayeredArchitectureExample.Business.Constants;
+using LayeredArchitectureExample.Business.ValidationRules.FluentValidation;
+using LayeredArchitectureExample.Core.Aspects.Autofac.Validation;
+using LayeredArchitectureExample.Core.CrossCuttingConcerns.Validation;
 using LayeredArchitectureExample.Core.Utilities.Results;
 using LayeredArchitectureExample.DataAccess.Abstract;
 using LayeredArchitectureExample.DataAccess.Concrete.InMemory;
@@ -13,7 +17,7 @@ using LayeredArchitectureExample.Entities.DTOs;
 
 namespace LayeredArchitectureExample.Business.Concrete
 {
-    public class ProductManager:IProductService
+    public class ProductManager : IProductService
     {
         private IProductDal _productDal;
 
@@ -21,13 +25,9 @@ namespace LayeredArchitectureExample.Business.Concrete
         {
             _productDal = productDal;
         }
-
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            if (product.ProductName.Length < 2)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
         }
@@ -38,12 +38,12 @@ namespace LayeredArchitectureExample.Business.Concrete
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll(),Messages.ProductsListed);
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
         }
 
         public IDataResult<List<Product>> GetAllByCategoryId(int id)
         {
-          return  new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
 
         public IDataResult<Product> GetById(int productId)
