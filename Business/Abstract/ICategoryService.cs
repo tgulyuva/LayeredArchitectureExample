@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LayeredArchitectureExample.Core.Utilities.Results;
 using LayeredArchitectureExample.Entities.Concrete;
 
 namespace LayeredArchitectureExample.Business.Abstract
 {
     public interface ICategoryService
     {
-        List<Category> GetAll();
-        Category GetById(int id);
+        IDataResult<List<Category>> GetAll();
+        IDataResult<Category> GetById(int id);
     }
 }
