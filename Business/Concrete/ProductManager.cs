@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using LayeredArchitectureExample.Business.Abstract;
+using LayeredArchitectureExample.Business.BusinessAspects.Autofac;
 using LayeredArchitectureExample.Business.CCS;
 using LayeredArchitectureExample.Business.Constants;
 using LayeredArchitectureExample.Business.ValidationRules.FluentValidation;
@@ -29,6 +30,7 @@ namespace LayeredArchitectureExample.Business.Concrete
             _productDal = productDal;
             
         }
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
