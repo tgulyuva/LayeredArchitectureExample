@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using LayeredArchitectureExample.Core.Entities.Concrete;
 using LayeredArchitectureExample.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,10 @@ namespace LayeredArchitectureExample.DataAccess.Concrete.EntityFramework
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Customer> Customers{ get; set; }
         public DbSet<Order> Orders{ get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
 
     }
 }
