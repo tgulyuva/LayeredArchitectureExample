@@ -12,12 +12,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using LayeredArchitectureExample.Business.Abstract;
 using LayeredArchitectureExample.Business.Concrete;
+using LayeredArchitectureExample.Core.DependencyResolvers;
+using LayeredArchitectureExample.Core.Utilities.IoC;
 using LayeredArchitectureExample.Core.Utilities.Security.Encryption;
 using LayeredArchitectureExample.Core.Utilities.Security.JWT;
 using LayeredArchitectureExample.DataAccess.Abstract;
 using LayeredArchitectureExample.DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
+using LayeredArchitectureExample.Core.Extensions;
 
 namespace LayeredArchitectureExample.WebAPI
 {
@@ -34,8 +38,6 @@ namespace LayeredArchitectureExample.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddSingleton<IProductService, ProductManager>();
-            //services.AddSingleton<IProductDal, EfProductDal>();
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -52,6 +54,10 @@ namespace LayeredArchitectureExample.WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+            services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule()
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
