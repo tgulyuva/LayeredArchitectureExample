@@ -25,10 +25,10 @@ namespace LayeredArchitectureExample.Business.Concrete
         private IProductDal _productDal;
         private ICategoryService _categoryService;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
-            
+            _categoryService = categoryService;
         }
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
