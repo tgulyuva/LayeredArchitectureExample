@@ -30,6 +30,7 @@ namespace LayeredArchitectureExample.Business.Concrete
             _productDal = productDal;
             _categoryService = categoryService;
         }
+
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
@@ -43,7 +44,7 @@ namespace LayeredArchitectureExample.Business.Concrete
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
         }
-
+        [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
             if (DateTime.Now.Hour == 22)
