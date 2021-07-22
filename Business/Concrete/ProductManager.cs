@@ -9,6 +9,7 @@ using LayeredArchitectureExample.Business.BusinessAspects.Autofac;
 using LayeredArchitectureExample.Business.CCS;
 using LayeredArchitectureExample.Business.Constants;
 using LayeredArchitectureExample.Business.ValidationRules.FluentValidation;
+using LayeredArchitectureExample.Core.Aspects.Autofac.Caching;
 using LayeredArchitectureExample.Core.Aspects.Autofac.Validation;
 using LayeredArchitectureExample.Core.CrossCuttingConcerns.Validation;
 using LayeredArchitectureExample.Core.Utilities.Business;
@@ -33,6 +34,7 @@ namespace LayeredArchitectureExample.Business.Concrete
 
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
             IResult result = BusinessRules.Run(CheckIfProductNameExists(product.ProductName),
@@ -58,7 +60,7 @@ namespace LayeredArchitectureExample.Business.Concrete
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
-
+        [CacheAspect]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDal.Get(x => x.ProductId == productId));
@@ -74,6 +76,7 @@ namespace LayeredArchitectureExample.Business.Concrete
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
         }
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(Product product)
         {
             _productDal.Add(product);
